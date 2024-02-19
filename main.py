@@ -15,7 +15,9 @@ LONG_BREAK_MIN = 20
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- # 
 def countdown(count):
-    window.after(1000, countdown, count-1)
+    canvas.itemconfig(timer_text)
+    if count > 0:
+        window.after(1000, countdown, count-1)
 
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
@@ -28,7 +30,7 @@ title_label.grid(column=1,row=0)
 canvas = Canvas(height=224, width=200, bg=YELLOW, highlightthickness=0)
 tomato = PhotoImage(file="tomato.png")
 canvas.create_image(100,112, image = tomato)
-canvas.create_text(100,132, text="00:00", fill="white", font=(FONT_NAME, 30) )
+timer_text = canvas.create_text(100,132, text="00:00", fill="white", font=(FONT_NAME, 30) )
 canvas.grid(column=1,row=1)
 
 reset_button = Button(text="reset", highlightthickness=0)
