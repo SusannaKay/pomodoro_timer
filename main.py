@@ -56,6 +56,9 @@ def countdown(count):
     if count > 0:
         timer = window.after(1000, countdown, count-1)
     else:
+        window.lift()
+        window.attributes('-topmost', True)
+        window.attributes('-topmost', False)
         
         if reps %2 == 0:
             txt += "✓"
