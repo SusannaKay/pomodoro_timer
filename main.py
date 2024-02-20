@@ -10,6 +10,8 @@ WORK_MIN = 5
 SHORT_BREAK_MIN = 3
 LONG_BREAK_MIN = 20
 reps = 0
+txt = ""
+
 # ---------------------------- TIMER RESET ------------------------------- # 
 
 # ---------------------------- TIMER MECHANISM ------------------------------- # 
@@ -25,11 +27,14 @@ def start_timer():
         title_label.config(text="Break",fg=PINK)
     else:
         countdown(WORK_MIN)
-        title_label.config(text="Timer",fg=GREEN)
+        title_label.config(text="Work",fg=GREEN)
+    
     
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- # 
 def countdown(count):
+    global reps
+    global txt
     
     minutes = math.floor(count/60)
     seconds= count%60
@@ -41,7 +46,12 @@ def countdown(count):
     if count > 0:
         window.after(1000, countdown, count-1)
     else:
+        
+        if reps %2 == 0:
+            txt += "✓"
+            check_text.config(text=txt)
         start_timer()
+
 
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
@@ -65,7 +75,7 @@ reset_button.grid(column=2, row=3)
 start_button = Button(text="start", highlightthickness=0, command=start_timer)
 start_button.grid(column=0, row=3)
 
-check_text = Label(text="✓", fg=GREEN, bg=YELLOW, font=(20))
+check_text = Label(fg=GREEN, bg=YELLOW, font=(20))
 check_text.grid(column=1, row=2)
 window.mainloop()
 
